@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Birthday Girl 👑 | كل عام وانتي بخير</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="موقع احتفالي بعيد الميلاد مع خلفية القط الكيوت ومفاجآت تفاعلية وموسيقى">
+  <meta name="theme-color" content="#0b0814">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Fullscreen Background Container -->
+  <div class="bg-wrapper">
+    <!-- Blurred Background Atmosphere -->
+    <div class="bg-blur"></div>
+    <!-- Main Framed Cat Photo -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+    <div class="sparkles-container" id="sparklesContainer"></div>
+    <div class="balloons-container" id="balloonsContainer"></div>
+  </div>
+
+  <!-- Background Particle Canvas -->
+  <canvas id="effectsCanvas"></canvas>
+
+  <!-- Main Mobile App Wrapper -->
+  <main class="app-container">
+
+    <!-- INITIAL START OVERLAY (Screen 1) -->
+    <section class="start-overlay" id="startOverlay">
+      <div class="start-card">
+        <div class="badge-pill">
+          <i class="fa-solid fa-crown"></i> Special Birthday
+        </div>
+        
+        <h1 class="start-title font-en">Birthday Girl 👑</h1>
+
+        <p class="start-subtitle">
+          كل عام وانتي قطوتي السعييله ياارب 💖<br>
+          عقبال السنين السعيده وجعل الدنيا ما تزعلك يا بسمة شفاتي ✨
+        </p>
+
+        <button class="btn-primary start-btn transparent-btn" id="startBtn">
+          <span class="btn-pulse"></span>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>اضغط لبدء الأغنية والاحتفال 🎉</span>
+        </button>
+
+        <p class="tap-hint"><i class="fa-solid fa-volume-high"></i> ارفع صوت الجوال للاستمتاع بالأغنية</p>
+      </div>
+    </section>
+
+    <!-- MAIN CELEBRATION CONTENT (Screen 2 - Active after click) -->
+    <section class="celebration-content hidden" id="celebrationContent">
+      
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <span class="birthday-tag"><i class="fa-solid fa-crown"></i> Birthday Girl</span>
+        <button class="icon-btn" id="confettiReplayBtn" title="إطلاق الزينة">
+          <i class="fa-solid fa-party-horn"></i>
+        </button>
+      </header>
+
+      <!-- Hero Header with Dedicated Custom Message -->
+      <div class="hero-header">
+        <h1 class="main-heading glow-text font-en">✨ Birthday Girl ✨</h1>
+        <div class="custom-message-box">
+          <p class="custom-message-text">
+            كل عام وانتي قطوتي السعييله ياارب.. وعقبال السنين السعيده وجعل الدنيا ما تزعلك يا بسمة شفاتي 💖✨🌸
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive Cupcake & Candle Section -->
+      <div class="cake-interactive-box" id="cakeBox">
+        <div class="cupcake-wrapper">
+          <div class="candle-flame" id="candleFlame"></div>
+          <div class="glow-halo" id="glowHalo"></div>
+          <div class="cupcake-icon">🧁</div>
+        </div>
+        <button class="candle-btn transparent-btn" id="candleBtn">
+          <i class="fa-solid fa-wind"></i> <span id="candleBtnText">اضغط لإطفاء الشمعة والتمني ✨</span>
+        </button>
+      </div>
+
+      <!-- Re-trigger Animation Actions -->
+      <div class="action-buttons">
+        <button class="btn-secondary transparent-btn" id="moreConfettiBtn">
+          <i class="fa-solid fa-sparkles"></i> أطلق المزيد من الزينة 🎉
+        </button>
+        <button class="btn-secondary transparent-btn" id="spawnBalloonsBtn">
+          <i class="fa-solid fa-balloon"></i> تطير بالونات أكثر 🎈
+        </button>
+      </div>
+
+      <!-- Audio Player Control Deck -->
+      <div class="audio-deck">
+        <div class="deck-header">
+          <div class="song-info">
+            <span class="song-title"><i class="fa-solid fa-music"></i> أغنية عيد الميلاد</span>
+            <span class="song-status" id="songStatus">جاري التشغيل...</span>
+          </div>
+          
+          <div class="deck-actions">
+            <!-- SoundCloud Link -->
+            <a href="https://soundcloud.com/q1ri91vcbvom/utqdjghufbma?si=f068449019704af98e48fa9bff427bc7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" 
+               target="_blank" rel="noopener" class="soundcloud-link-btn" title="فتح الأغنية على SoundCloud">
+              <i class="fa-brands fa-soundcloud"></i>
+            </a>
+
+            <button class="play-toggle-btn" id="playToggleBtn" aria-label="تشغيل أو إيقاف">
+              <i class="fa-solid fa-pause" id="playIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Audio Visualizer Canvas -->
+        <canvas id="visualizerCanvas" height="32"></canvas>
+
+        <!-- Progress Slider -->
+        <div class="progress-wrapper">
+          <span class="time-text" id="currentTimeText">0:00</span>
+          <input type="range" class="progress-bar" id="progressBar" value="0" min="0" max="100" step="0.1">
+          <span class="time-text" id="durationText">0:00</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- HTML5 Audio Element -->
+  <audio id="birthdayAudio" src="assets/audio/birthday_song.m4a" preload="auto" loop></audio>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
